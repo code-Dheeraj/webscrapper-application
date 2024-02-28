@@ -76,34 +76,49 @@ output_folder = st.text_input("Enter output folder path:", "output")
 os.makedirs(output_folder, exist_ok=True)
 
 # Scrape and download buttons
+
 if st.button("Scrape and Download Tables"):
     if website_url:
-        # Scrape tables and get CSV file info
-        csv_files_info = scrape_and_export_first_five_tables(website_url, output_folder)
+        # Send an HTTP GET request to the specified URL
+        response = requests.get(website_url)
+        response.raise_for_status()  # Raise an exception for bad status codes
 
-        if csv_files_info:
-            # Provide download buttons for each CSV file
-            for file_info in csv_files_info:
-                st.download_button(
-                    label=f"Download {file_info['table_name']} Table",
-                    data=open(os.path.join(output_folder, file_info['file_name']), 'rb').read(),
-                    file_name=file_info['file_name'],
-                )
+        # Parse the HTML content of the page using BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
 
-            try:
-                # Create a zip file containing all CSV files
-                zip_file_path = os.path.join(output_folder, 'all_tables.zip')
-                with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
-                    for file_info in csv_files_info:
-                        file_path = os.path.join(output_folder, file_info['file_name'])
-                        zip_file.write(file_path, file_info['file_name'])
+        # Find all tables on the webpage
+        tables = soup.find_all('table')
 
-                # Provide a download button for the zip file
-                st.download_button(
-                    label="Download All Tables (ZIP)",
-                    data=open(zip_file_path, 'rb').read(),
-                    file_name='all_tables.zip',
-                )
+        if not tables:
+            st.warning("No tables found on the webpage.")
+        else:
+            # Scrape tables and get CSV file info
+            csv_files_info = scrape_and_export_first_five_tables(website_url, output_folder)
 
-            except Exception as e:
-                st.error(f"Error creating ZIP file: {e}")
+            if csv_files_info:
+                # Provide download buttons for each CSV file
+                for file_info in csv_files_info:
+                    st.download_button(
+                        label=f"Download {file_info['table_name']} Table",
+                        data=open(os.path.join(output_folder, file_info['file_name']), 'rb').read(),
+                        file_name=file_info['file_name'],
+                    )
+
+                try:
+                    # Create a zip file containing all CSV files
+                    zip_file_path = os.path.join(output_folder, 'all_tables.zip')
+                    with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
+                        for file_info in csv_files_info:
+                            file_path = os.path.join(output_folder, file_info['file_name'])
+                            zip_file.write(file_path, file_info['file_name'])
+
+                    # Provide a download button for the zip file
+                    st.download_button(
+                        label="Download All Tables (ZIP)",
+                        data=open(zip_file_path, 'rb').read(),
+                        file_name='all_tables.zip',
+                    )
+
+                except Exception as e:
+                    st.error(f"Error creating ZIP file: {e}")
+
