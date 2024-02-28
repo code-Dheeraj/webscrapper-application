@@ -34,11 +34,16 @@ This Python-based application leverages Streamlit, BeautifulSoup, and Pandas to 
 
 ## Screenshots
 
-[Include screenshots or GIFs of your application in action.]
+[I![image](https://github.com/code-Dheeraj/webscrapper-application/assets/72144099/036ebdc4-673d-4b16-9bc5-3aa2c544f6fb)
+![image](https://github.com/code-Dheeraj/webscrapper-application/assets/72144099/c7c2edc3-5bb2-4b8a-8b00-c3a964049700)
+![image](https://github.com/code-Dheeraj/webscrapper-application/assets/72144099/b0ceb79f-a383-48cf-9de4-28b2bcde3840)
+![image](https://github.com/code-Dheeraj/webscrapper-application/assets/72144099/cca65b83-66ff-4a3b-bee9-45fab19ea603)
+
+]
 
 ## Demo
 
-[Include a link to a live demo of your application if available.]
+[https://www.linkedin.com/posts/dheeraj-singh-8062311b8_python-datascience-webscraping-activity-7168530665355816964-AaEl?utm_source=share&utm_medium=member_desktop]
 
 ## Contributing
 
