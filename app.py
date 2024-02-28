@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 import shutil
+import zipfile
+
 
 def scrape_and_export_first_five_tables(url, output_folder):
     try:
@@ -58,6 +60,9 @@ def export_csv(dataframe, file_path):
     except Exception as e:
         st.error(f"Error exporting to CSV: {e}")
 
+
+# ... (Previous functions remain unchanged)
+
 # Streamlit UI
 st.title("Web Scraper and CSV Downloader")
 
@@ -85,17 +90,10 @@ if st.button("Scrape and Download Tables"):
                     file_name=file_info['file_name'],
                 )
 
-# Download all button
-if st.button("Download All Tables"):
-    if website_url:
-        # Scrape tables and get CSV file info
-        csv_files_info = scrape_and_export_first_five_tables(website_url, output_folder)
-
-        if csv_files_info:
             try:
                 # Create a zip file containing all CSV files
                 zip_file_path = os.path.join(output_folder, 'all_tables.zip')
-                with shutil.ZipFile(zip_file_path, 'w') as zip_file:
+                with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
                     for file_info in csv_files_info:
                         file_path = os.path.join(output_folder, file_info['file_name'])
                         zip_file.write(file_path, file_info['file_name'])
