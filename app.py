@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import os
-import zipfile
+import shutil
 
 def scrape_and_export_first_five_tables(url, output_folder):
     try:
