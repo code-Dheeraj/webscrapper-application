@@ -8,10 +8,10 @@ This Streamlit application allows users to input a website URL, scrape the first
 ## Features
 - **Scrape and Download Tables:**
   - Input a website URL.
-  - Click the "Scrape and Download Tables" button to scrape the first 5 tables and download each table's data as a separate CSV file.
+  - Click the "Scrape and Download Tables" button to scrape all the tables and download each table's data as a separate CSV file.
 
 - **Download All Tables:**
-  - Click the "Download All Tables" button to scrape the first 5 tables and download all tables' data in a single ZIP file.
+  - Click the "Download All Tables" button to scrape all the tables and download all tables' data in a single ZIP file.
 
 ## Prerequisites
 - Python 3.x
