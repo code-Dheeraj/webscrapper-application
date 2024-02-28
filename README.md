@@ -1,7 +1,3 @@
-Certainly! Below is a template for a README file for your web scraper and CSV downloader application. Please customize it based on your actual project structure, features, and additional information.
-
----
-
 # Web Scraper and CSV Downloader
 
 ## Overview
@@ -63,3 +59,5 @@ While the application serves its purpose, there are areas where improvements can
 
 5. **Logging:** Implement logging to capture and review errors or issues that may occur during the scraping and downloading process.
 
+## Link for demo
+https://capital-asset-pricing-model-dheeraj.streamlit.app/
